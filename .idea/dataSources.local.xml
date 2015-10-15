@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - mps@localhost" uuid="e7951878-dffd-4a43-bd2a-718a356c6d10">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>citemp.* mps.*</schema-pattern>
+      <default-schemas>mps.*</default-schemas>
+    </data-source>
+  </component>
+</project>

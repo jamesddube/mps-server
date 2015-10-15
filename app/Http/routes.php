@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test','TestController@sample');
+
+Route::resource('order','OrderController');
+Route::group(['prefix' => 'api'],function()
+{
+    Route::resource('orders','ApiOrderController');
+    Route::resource('order_details','ApiOrderDetailsController');
+    Route::resource('users','ApiUserController');
+
+    Route::get('/',function(){
+
+        return response()->json(['message' => "welcome to the mps api"],200);
+    });
+});
+
+

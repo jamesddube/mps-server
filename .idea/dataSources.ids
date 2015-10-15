@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - mps@localhost" uuid="e7951878-dffd-4a43-bd2a-718a356c6d10">
+    <database-info product="MySQL" version="5.5.44-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="citemp"/>
+    <schema name="" catalog="mps"/>
+    <table name="aximos_customers" schema="" catalog="citemp" type="TABLE">
+      <column name="CustomerID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CustomerNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CustomerName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Telephone" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Fax" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Email" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ContactPerson" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ContactCell" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Target" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="StatusID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="RouteID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="FiscalNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CallDays" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Deleted" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="CreatedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="CreatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="pdatedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="UpdatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PaymentMethod" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CustomerType" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="IsMaster" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="VATNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="AccountBalance" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="CreditLimit" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="PriceListID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CustomerPaymentDiscount" sqlType="DECIMAL" precision="18" scale="4" nullable="true" jdbcType="3"/>
+      <column name="UpdateDetails" sqlType="BIT" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <column name="KeyChain" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PlanTimeIn" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="customers" schema="" catalog="citemp" type="TABLE">
+      <column name="customer_id" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
+      <column name="customer_name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_type" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="phone" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="fax" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="route" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="customer_id"/>
+      <exported-key name="test_ibfk_1" table="test" schema="" catalog="citemp" columns="cust"/>
+    </table>
+    <table name="destination" schema="" catalog="citemp" type="TABLE">
+      <column name="RouteSheetStatusID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="invoices_sync" schema="" catalog="citemp" type="TABLE">
+      <column name="invoice_number" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="invoice_sync" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="invoice_number"/>
+    </table>
+    <table name="logs" schema="" catalog="citemp" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="tag" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="user" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="logs_sync" schema="" catalog="citemp" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="time" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="tag" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="message" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="user" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="lucustomertypes" schema="" catalog="citemp" type="TABLE">
+      <column name="CustomerTypeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Visible" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ=="/>
+    </table>
+    <table name="luproductcategories" schema="" catalog="citemp" type="TABLE">
+      <column name="ProductCategoryID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ProductCategoryID"/>
+    </table>
+    <table name="luproductpacksize" schema="" catalog="citemp" type="TABLE">
+      <column name="PackSizeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="luproducttypes" schema="" catalog="citemp" type="TABLE">
+      <column name="ProductTypeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Code" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ProductTypeID"/>
+    </table>
+    <table name="order_details" schema="" catalog="citemp" type="TABLE">
+      <column name="order_details_id" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="order_id" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="quantity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="status_code" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="order_details_id"/>
+      <foreign-key name="order_id" columns="order_id" ref-table="orders" ref-schema="" ref-catalog="citemp" ref-columns="order_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="order_id_idx" unique="false" columns="order_id"/>
+      <index name="product_id_idx" unique="false" columns="product_id"/>
+    </table>
+    <table name="orders" schema="" catalog="citemp" type="TABLE">
+      <column name="order_id" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="VARCHAR" precision="225" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_id" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="salesrep" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12" def="J3VucHJvY2Vzc2VkJw=="/>
+      <column name="deleted" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="sync_status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="received" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+      <exported-key name="order_id" table="order_details" schema="" catalog="citemp" columns="order_id"/>
+    </table>
+    <table name="products" schema="" catalog="citemp" type="TABLE">
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="prodname" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="prodcategory" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="prodgroup" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="prodprice" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="product_id"/>
+      <index name="product_id_UNIQUE" unique="true" columns="product_id"/>
+    </table>
+    <table name="salesrep" schema="" catalog="citemp" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="unique_id" unique="true" columns="id"/>
+    </table>
+    <table name="stocks" schema="" catalog="citemp" type="TABLE">
+      <column name="stock_id" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="qty" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <primary-key name="PRIMARY" columns="stock_id"/>
+    </table>
+    <table name="tblcustomerbranches" schema="" catalog="citemp" type="TABLE">
+      <column name="CustomerBranchID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CustomerID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="BranchName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="CreatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UpdatedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="UpdatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="tblcustomers" schema="" catalog="citemp" type="TABLE">
+      <column name="CustomerID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="CustomerNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CustomerName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Telephone" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Fax" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Email" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ContactPerson" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ContactCell" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Target" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="StatusID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="RouteID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="FiscalNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CallDays" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Deleted" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="CreatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UpdatedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="UpdatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PaymentMethod" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CustomerType" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="IsMaster" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="VATNumber" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="AccountBalance" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3" def="MC4wMA=="/>
+      <column name="CreditLimit" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3" def="MC4wMA=="/>
+      <column name="PriceListID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="CustomerPaymentDiscount" sqlType="DECIMAL" precision="18" scale="4" nullable="true" jdbcType="3" def="MC4wMDAw"/>
+      <column name="UpdateDetails" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="KeyChain" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PlanTimeIn" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="CustomerID"/>
+      <index name="IX_tblCustomers" unique="false" columns="CustomerID"/>
+    </table>
+    <table name="tblproducts" schema="" catalog="citemp" type="TABLE">
+      <column name="ProductID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Code" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ProductCategoryID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="OnHand" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ReOrderLevel" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ExclUnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="UnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="WholesaleExclUnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="WholesaleUnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="ProductTypeID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="TaxCode" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EmptiesCode" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="CreatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UpdatedDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="UpdatedBy" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Deleted" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="OtherPrice1" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="OtherPrice2" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="OtherPrice3" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="OtherPrice4" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="OtherPrice5" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="PackSizeID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="AccountCustomerCashDiscount" sqlType="DECIMAL" precision="18" scale="4" nullable="true" jdbcType="3" def="MC4wMDAw"/>
+      <column name="UnitFactor" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="UnitMeasure" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ProductID"/>
+    </table>
+    <table name="tblstatus" schema="" catalog="citemp" type="TABLE">
+      <column name="StatusID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="RouteSheetStatusID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="test" schema="" catalog="citemp" type="TABLE">
+      <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="cust" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+      <foreign-key name="test_ibfk_1" columns="cust" ref-table="customers" ref-schema="" ref-catalog="citemp" ref-columns="customer_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="user_roles" schema="" catalog="citemp" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="role_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_add" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_view" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_delete" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="role_class" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="users" schema="" catalog="citemp" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fname" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="surname" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="picture" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="activation" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="email"/>
+    </table>
+    <table name="users_2" schema="" catalog="citemp" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fname" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="surname" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="picture" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="email"/>
+    </table>
+    <table name="vCombinedRecords" schema="" catalog="citemp" type="VIEW">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="vw_order_details" schema="" catalog="citemp" type="VIEW">
+      <column name="order_id" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="customer_id" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_phone" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="prodname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="prodprice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="packsize" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="quantity" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="product_total" sqlType="DECIMAL" precision="28" scale="2" nullable="true" jdbcType="3"/>
+      <column name="salesrep_id" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="salesrep" sqlType="VARCHAR" precision="91" scale="0" nullable="true" jdbcType="12"/>
+      <column name="deleted" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+    </table>
+    <table name="vw_orders" schema="" catalog="citemp" type="VIEW">
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="order_id" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12" def="J3VucHJvY2Vzc2VkJw=="/>
+      <column name="deleted" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="salesrep_email" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="received" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="salesrep" sqlType="VARCHAR" precision="91" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="route" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="customer_type" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="vw_stocks" schema="" catalog="citemp" type="VIEW">
+      <column name="ProductID" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ProductName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ProductCategory" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Quantity" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12" def="JzAn"/>
+    </table>
+    <table name="vw_users" schema="" catalog="citemp" type="VIEW">
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="role_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role_class" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_add" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_view" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_delete" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="vwproducts" schema="" catalog="citemp" type="VIEW">
+      <column name="ProductID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Code" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="UnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="WholesaleUnitPrice" sqlType="DECIMAL" precision="18" scale="2" nullable="true" jdbcType="3"/>
+      <column name="PackSize" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="migrations" schema="" catalog="mps" type="TABLE">
+      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="order_details" schema="" catalog="mps" type="TABLE">
+      <column name="order_details_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="order_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="quantity" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sales_rep" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sync_status" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="order_details_id"/>
+    </table>
+    <table name="orders" schema="" catalog="mps" type="TABLE">
+      <column name="order_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="customer_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sales_rep" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="order_status" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sync_status" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+    </table>
+    <table name="password_resets" schema="" catalog="mps" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <index name="password_resets_email_index" unique="false" columns="email"/>
+      <index name="password_resets_token_index" unique="false" columns="token"/>
+    </table>
+    <table name="users" schema="" catalog="mps" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="users_email_unique" unique="true" columns="email"/>
+    </table>
+  </data-source>
+</component>
