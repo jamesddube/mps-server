@@ -22,6 +22,14 @@ class OrderModel extends Model
         "sync_status"
     ];
 
+    public function lineItems()
+    {
+        return $this->hasMany('App\OrderDetailsModel','order_id');
+    }
+
+
+
+
 
 }
 

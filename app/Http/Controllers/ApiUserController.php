@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ApiUserController extends Controller
+class ApiUserController extends Api
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,13 @@ class ApiUserController extends Controller
      */
     public function index()
     {
-        //
-        $users = new User();
 
-        return $users->all();
+        $users = User::all()->each(function($u){
+            $u->orders = $u->ordersCount();
+        });
+
+        return $users;
+
     }
 
     /**
@@ -31,6 +34,8 @@ class ApiUserController extends Controller
     public function create()
     {
         //
+
+
     }
 
     /**

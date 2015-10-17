@@ -4,28 +4,16 @@ namespace App\Http\Controllers;
 
 use App\OrderDetailsModel;
 use App\OrderModel;
+use App\User;
+use App\vwOrdersModel;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ApiOrderController extends Controller
 {
-    /**
-     * @desc An instance of the OrderModel Class
-     * @var OrderModel
-     */
-    private  $apiOrder ;
-
-    /**
-     * @var OrderDetailsModel
-     */
-    private  $apiOrderDetails ;
-
-    /**
-     * @var array
-     */
-    private $orderAttributes;
 
     /**
      * Display a listing of the resource.
@@ -34,10 +22,16 @@ class ApiOrderController extends Controller
      */
     public function index()
     {
-        //
-        $orders = new OrderModel();
 
-        return $orders->all();
+
+        $orders = vwOrdersModel::all()
+            ->each(function(vwOrdersModel $o)
+            {
+                $o->lineItems;
+            });
+
+        return $orders;
+
     }
 
     /**
@@ -54,68 +48,55 @@ class ApiOrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-        $sample = new TestController();
 
-        $sample = $sample->sample();
+        $s = TestController::sample(2);
 
-        if(json_decode($sample)){
-            //json decoded
-
-            $decoded_string = json_decode($sample);
-
-            try
-            {
-
-                $this->init();
-
-                $this->validateOrder($decoded_string[0]);
-
-                //data sent in is ok
-
-                $this->setAttributes($decoded_string[0]);
-
-                $this->apiOrder->save();
-
-            }
-            catch(Exception $e)
-            {
-                return TestController::genError("order processing error",$e->getMessage());
-            }
-        }
-        else
+        try
         {
-            return TestController::genError("invalid json","we could no decode the json string");
+            $models = Api::getModelsFromJson($s,new OrderModel());
+
+
+            foreach($models as $model)
+            {
+                $model->save();
+            }
+
+            return Api::genMessage("orders saved");
         }
+        catch(Exception $e)
+        {
+            return Api::genError("order processing error",$e->getMessage());
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        if($orders = OrderModel::find($id))
-        {
-            return $orders;
-        }
-        else{
-            return response()->json(['message' => "order $id not found"],200);
-        }
+
+        $results = vwOrdersModel::find($id);
+        return count($results) > 0 ? $results : Api::genError
+        (
+            'invalid order',
+            'the requested order could not be found or does not exist'
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -126,8 +107,8 @@ class ApiOrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -138,7 +119,7 @@ class ApiOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -146,51 +127,4 @@ class ApiOrderController extends Controller
         //
     }
 
-    /*
-    |-------------------------------------------------------------------------
-    | Custom Functions
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register all of the routes for an application.
-    | It's a breeze. Simply tell Laravel the URIs it should respond to
-    | and give it the controller to call when that URI is requested.
-    |
-   */
-
-    public function validateOrder($string)
-    {
-
-        if($string)
-        {
-            foreach($this->orderAttributes as $attribute)
-            {
-                if(is_null(object_get($string,$attribute)))
-                {
-                    throw new Exception ("required order attribute $attribute, not found");
-                }
-            }
-                if(is_null(object_get($string,'order_details') ) )
-                {
-                    throw new Exception ("required 'order_details' attribute not found or is not in the correct format");
-                }
-        }
-    }
-
-    /**
-     * @param $order OrderModel
-     */
-    private function setAttributes($order)
-    {
-        foreach($this->orderAttributes as $attribute)
-        {
-            $this->apiOrder->setAttribute($attribute,$order->$attribute);
-        }
-    }
-
-    private function init()
-    {
-        $this->apiOrder = new OrderModel();
-        $this->apiOrderDetails = new OrderDetailsModel();
-        $this->orderAttributes = $this->apiOrder->getFillable();
-    }
 }

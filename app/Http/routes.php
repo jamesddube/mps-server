@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test','TestController@sample');
+Route::get('/test','TestController@req');
+Route::get('/test/sample','TestController@gen');
 
 Route::resource('order','OrderController');
 Route::group(['prefix' => 'api'],function()

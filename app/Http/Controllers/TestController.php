@@ -35,33 +35,56 @@ class TestController extends Controller
         return $orders->all();
     }
     
-    public function sample()
+    public static function sample($number = 2)
     {
-        $req = array
-        (
-            'order_id' => 'OD77778989',
-            'customer_id' => 'M-238',
-            'sales_rep' => 'jdube@mbc.co.zw',
-            'order_status' => 'draft',
-            'sync_status' => 'draft',
-            'order_details' => array
+        $faker = Factory::create();
+        for($i = 0 ; $i < $number ; $i++)
+        {
+            $order_id = $faker->numerify('OD-########');
+            $Item[] = array
             (
-                1030 => 89,
-                2030 => 67,
-                6080 => 29,
-                1090 => 890,
-            )
-        );
+                "order_id" => $order_id,
+                "customer_id" => ucfirst($faker->randomLetter).$faker->numerify('-###'),
+                "sales_rep" => strtolower($faker->firstName."@mbc.co.zw"),
+                "order_status" => $faker->randomElement($array = array ('draft','unprocessed','processed')),
+                "sync_status" =>1,
+            );
 
-        $orders [] = $req;
-        $orders [] = $req;
+            $lineItem[] = array
+            (
+                "order_details_id" => $order_id.$faker->numerify("-##"),
+                "order_id" => $order_id,
+                "product_id" => $faker->randomDigit.'0'.$faker->randomDigit.'0',
+                "quantity" => $faker->randomNumber(2),
+            );
 
-        return json_encode($orders);
+        }
+
+        return json_encode($Item);
     }
 
-    public static function genError($error_type,$error_desc)
+    public function req()
     {
-        return response()->json(['error' => $error_type,'error_description' => $error_desc]);
+        $m = new OrderDetailsModel();
+
+        dd($m->exists('OD-100-00j'));
+
+
     }
+
+    public function gen()
+    {
+       $s = self::sample(3);
+
+      $orders = Api::getModelsFromJson($s);
+
+      $user = User::find(2);
+
+      return $orders = $user->orders()->save($orders[0]);
+
+
+    }
+
+
 
 }
