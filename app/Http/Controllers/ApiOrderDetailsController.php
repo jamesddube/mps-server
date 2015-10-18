@@ -41,7 +41,28 @@ class ApiOrderDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $objectArray = Api::sample(new OrderDetailsModel());
+
+        try
+        {
+            $objectArray = Api::getObject($objectArray);
+
+            $models = Api::getModelsFromJson($objectArray,new OrderDetailsModel());
+
+            foreach($models as $model)
+            {
+                $model->save();
+            }
+
+            return Api::genMessage("order details saved");
+        }
+        catch(\Exception $e)
+        {
+            return Api::genMessage($e->getMessage(),true);
+        }
+
+
     }
 
     /**

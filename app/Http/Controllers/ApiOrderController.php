@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ApiOrderController extends Controller
 {
@@ -47,21 +48,23 @@ class ApiOrderController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @var OrderModel $model
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        /**@var OrderModel $model*/
 
-        $s = TestController::sample(2);
+        $orderArray = Api::sample(new OrderModel());
 
         try
         {
-            $models = Api::getModelsFromJson($s,new OrderModel());
+            $objArray = Api::getObject($orderArray);
 
+            $models_o = Api::getModelsFromJson($objArray,new OrderModel());
 
-            foreach($models as $model)
+            foreach($models_o as $model)
             {
                 $model->save();
             }
@@ -70,9 +73,8 @@ class ApiOrderController extends Controller
         }
         catch(Exception $e)
         {
-            return Api::genError("order processing error",$e->getMessage());
+            return Api::genMessage($e->getMessage(),true,"order processing error");
         }
-
     }
 
     /**
@@ -85,11 +87,14 @@ class ApiOrderController extends Controller
     {
         //
 
+        /** @var OrderModel $results */
         $results = vwOrdersModel::find($id);
-        return count($results) > 0 ? $results : Api::genError
+        is_object($results) ? $results->lineItems : null;
+        return !is_null($results) ? $results : Api::genMessage
         (
-            'invalid order',
-            'the requested order could not be found or does not exist'
+            'the requested order could not be found or does not exist',
+            true,
+            'order not found'
         );
     }
 
@@ -113,7 +118,7 @@ class ApiOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

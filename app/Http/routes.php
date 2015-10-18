@@ -29,6 +29,10 @@ Route::group(['prefix' => 'api'],function()
 
         return response()->json(['message' => "welcome to the mps api"],200);
     });
+
+    Route::any('/{id}',function($id){
+        return \App\Http\Controllers\Api::genMessage("invalid or non existent api route, $id",true,"invalid route");
+    });
 });
 
 

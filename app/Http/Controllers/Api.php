@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\OrderDetailsModel;
 use App\OrderModel;
 use Exception;
+use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class Api extends Controller
@@ -18,7 +20,7 @@ class Api extends Controller
 
     /**
      * @desc An instance of the OrderModel Class
-     * @var OrderModel
+     * @var array OrderModel
      */
     private static $model = array();
 
@@ -30,31 +32,61 @@ class Api extends Controller
     /**
      * @var array
      */
-    private static $modelAttributes;
+    public $modelAttributes;
 
     public static function isJson($input)
     {
-        if(is_string($input))
-        {
-            if(json_decode($input))
-            {
+        if (is_string($input)) {
+            if (json_decode($input)) {
                 return true;
             }
+        }
+        throw new BadRequestHttpException ("invalid json string");
+    }
+
+    public static function validateProperties(Model $model)
+    {
+        switch ($model) {
+            case is_a($model,OrderDetailsModel::class) :
+                $validator = Validator::make($model->getAttributes(), [
+                    'order_details_id' => 'required',
+                    "order_id" => "required",
+                    "quantity" => "required|numeric",
+
+                ]);if ($validator->fails()) {
+
+                    self::validationErrors($validator->errors());
+                }
+            break;
+
+            case is_a($model,OrderModel::class) :
+                $validator = Validator::make($model->getAttributes(), [
+                    'order_id' => 'required',
+                    "customer_id" => "required",
+                    "sales_rep" => "required",
+                    "order_status" => "required",
+                ]);if ($validator->fails()) {
+
+                self::validationErrors($validator->errors());
+            }
+                break;
 
         }
-
-        throw new BadRequestHttpException ("invalid json string");
 
     }
 
 
-    public static function validateOrder($string)
+    /**
+     * @param $string
+     * @throws Exception
+     */
+    public function validateModel($string)
     {
-        foreach (self::$modelAttributes as $attribute) {
-                if (is_null(object_get($string, $attribute))) {
-                    throw new Exception ("required order attribute $attribute, not found");
-                }
+        foreach ($this->getModelAttributes() as $attribute) {
+            if (is_null(object_get($string, $attribute))) {
+                throw new Exception ("required Model attribute $attribute, not found");
             }
+        }
     }
 
     public static function hasLineItems($string)
@@ -69,89 +101,137 @@ class Api extends Controller
      * @param $model Model
      * @internal param $i
      */
-    public static function setAttributes($order,$model)
+    public function setAttributes($order, $model)
     {
-        foreach (self::$modelAttributes as $attribute)
-        {
+        foreach ($this->getModelAttributes() as $attribute) {
             $model->setAttribute($attribute, $order->$attribute);
         }
 
     }
 
-    public static function init(Model $model_class)
-    {
-        self::$model[] =  new $model_class();
-        self::$modelAttributes = self::$model[0]->getFillable();
-    }
-
-    public static function save()
-    {
-        self::$model->save();
-    }
-
-
-    /**
-     * @param $error_type
-     * @param $error_desc
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function genError($error_type,$error_desc)
-    {
-        return response()->json(['error' => $error_type,'error_description' => $error_desc]);
-    }
-
     /**
      * @param $msg_desc
+     * @param bool $error
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function genMessage($msg_desc)
+    public static function genMessage($msg_desc, $error = false, $error_type = "an error occured")
     {
-        return response()->json(['error'=> false,'message' => $msg_desc]);
+
+        return $error == true ?
+            response()->json(['error' => $error, 'error_type' => $error_type, 'error_description' => $msg_desc]) :
+            response()->json(['error' => $error, 'message' => $msg_desc]);
+
     }
 
     /**
-     * @param $input_string
+     * @param $obj array
      * @param Model $model
-     * @return OrderModel
+     * @return array Model
      * @throws Exception
      */
-    public static function getModelsFromJson($input_string, Model $model)
+    public static function getModelsFromJson($obj, Model $model)
     {
-        if(self::isJson($input_string))
-        {
-            $orders = json_decode($input_string);
+        for ($i = 0; $i < count($obj); $i++) {
 
-            self::init($model);
+            self::$model[] = new $model();
 
-            for($i = 0; $i<count($orders); $i++)
+            foreach(get_object_vars($obj[$i]) as $key => $value)
             {
-                self::$model[$i] = new $model();
-
-                self::validateOrder($orders[$i]);
-                self::setAttributes($orders[$i],self::$model[$i]);
+                self::$model[$i]->setAttribute($key, $value);
             }
-
-            return self::$model;
+            self::validateProperties(self::$model[$i]);
         }
+
+        return self::$model;
     }
 
+    /**
+     * @param array $input
+     * @return array
+     */
     public static function getObject($input)
     {
-        if(self::isJson($input))
-        {
+        if (self::isJson($input)) {
             return self::$jsonObject = json_decode($input);
         }
     }
 
     public static function getObjectAttribute($attribute)
     {
-        try{
+        try {
             return self::$jsonObject->$attribute;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
+
+    public static function all()
+    {
+        return self::$model[0]->getAttributes();
+    }
+
+    private static function validationErrors($messages)
+    {
+        $bag = "";
+
+        print_r($messages);
+
+        foreach ($messages->all() as $message) {
+            //
+             $bag .=  $message." ";
+        }
+
+        throw new Exception ($bag);
+    }
+
+    /**
+     * @return array
+     */
+    public function getModelAttributes()
+    {
+        return $this->modelAttributes;
+    }
+
+    public static function sample($model ,$number = 2)
+    {
+        $faker = Factory::create();
+
+
+        switch ($model)
+        {
+            case(is_a($model,OrderDetailsModel::class)) :
+                for($i = 0 ; $i < $number ; $i++)
+                {
+                    $order_id = $faker->numerify('OD-########');
+                    $sample[] = array
+                    (
+                        "order_details_id" => $order_id . $faker->numerify("-##"),
+                        "orderm_id" => $order_id,
+                        "product_id" => $faker->randomDigit . '0' . $faker->randomDigit . '0',
+                        "quantity" => $faker->randomNumber(2),
+                    );
+                }
+                break;
+
+            case(is_a($model,OrderModel::class)) :
+
+                for($i = 0 ; $i < $number ; $i++)
+                {
+                    $order_id = $faker->numerify('OD-########');
+                    $sample[] = array
+                    (
+                        "order_id" => $order_id,
+                        "customer_id" => ucfirst($faker->randomLetter).$faker->numerify('-###'),
+                        "sales_rep" => strtolower($faker->firstName."@mbc.co.zw"),
+                        "order_status" => $faker->randomElement($array = array ('draft','unprocessed','processed')),
+                        "sync_status" =>1,
+                    );
+                }
+                break;
+        }
+
+        return  json_encode($sample);
+    }
+
 
 }
