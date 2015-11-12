@@ -25,7 +25,7 @@ class VwOrdersMigration extends Migration
                     `sync_status`.`status` AS `status`
                 from
                     ((`orders`
-                    left join `users` ON ((`orders`.`sales_rep` = `users`.`id`)))
+                    left join `users` ON ((`orders`.`sales_rep` = `users`.`user_code`)))
                     left join `sync_status` ON ((`sync_status`.`id` = `orders`.`sync_status`)))";
 
         DB::statement($statement);
@@ -39,8 +39,8 @@ class VwOrdersMigration extends Migration
      */
     public function down()
     {
-        Schema::table('vw_orders', function (Blueprint $table) {
-            //
-        });
+        $statement = "DROP VIEW `mps`.`vw_orders`";
+
+        DB::statement($statement);
     }
 }

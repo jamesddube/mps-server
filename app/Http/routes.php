@@ -12,27 +12,59 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.master');
+});
+
+\Illuminate\Support\Facades\Route::get('/hie',function(){
+    return view('layout.master');
 });
 
 Route::get('/test','TestController@req');
 Route::get('/test/sample','TestController@gen');
 
 Route::resource('order','OrderController');
-Route::group(['prefix' => 'api'],function()
-{
-    Route::resource('orders','ApiOrderController');
-    Route::resource('order_details','ApiOrderDetailsController');
-    Route::resource('users','ApiUserController');
 
-    Route::get('/',function(){
+/*
+* Oauth 2 server
+*/
+App::singleton('oauth2',function(){
+    $storage = new OAuth2\Storage\Pdo(array('dsn' => 'mysql:dbname=it;host=localhost', 'username' => 'root', 'password' => 'sead2301'));
+    $server = new OAuth2\Server($storage);
 
-        return response()->json(['message' => "welcome to the mps api"],200);
-    });
+    $server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
+    $server->addGrantType(new OAuth2\GrantType\UserCredentials($storage));
 
-    Route::any('/{id}',function($id){
-        return \App\Http\Controllers\Api::genMessage("invalid or non existent api route, $id",true,"invalid route");
-    });
+    return $server;
 });
 
 
+
+
+Route::group(['prefix' => 'api'],function()
+{
+    Route::post('oauth/token', function(){
+
+        $bridgedRequest = OAuth2\HttpFoundationBridge\Request::createFromRequest(Request::instance());
+        $bridgedResponse = new OAuth2\HttpFoundationBridge\Response();
+
+        $bridgedResponse = App::make('oauth2')->handleTokenRequest($bridgedRequest,$bridgedResponse);
+
+        return $bridgedResponse;
+    });
+
+    Route::group(['middleware' => 'oauth'],function()
+    {
+        Route::resource('orders','Api/OrderController');
+        Route::resource('order_details','Api/OrderDetailsController');
+        Route::resource('users','Api/UserController');
+
+        Route::get('/',function(){
+
+            return response()->json(['message' => "welcome to the mps api"],200);
+        });
+
+        Route::any('/{id}',function($id){
+            return \App\Http\Controllers\Api::genMessage("invalid or non existent api route, $id",true,"invalid route");
+        });
+      });
+});

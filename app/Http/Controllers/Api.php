@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OrderDetailsModel;
 use App\OrderModel;
+use App\User;
 use Exception;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
@@ -87,6 +88,29 @@ class Api extends Controller
                 throw new Exception ("required Model attribute $attribute, not found");
             }
         }
+    }
+
+    public function setModelAttributes(Model $model)
+    {
+        $this->modelAttributes = $model->getFillable();
+    }
+
+    public static function filterModelAttributes($array,Model $model)
+    {
+        $column = array();
+
+        foreach ($array as $attribute => $value) {
+
+            if(in_array($attribute,$model->getFillable()))
+            {
+                $column[] = $attribute;
+            }
+
+        }
+
+        array_has($column,$model->getKeyName()) == false & count($column) > 0 ? $column[] = $model->getKeyName() : null;
+
+        return count($column) > 0 ? $column : array('*');
     }
 
     public static function hasLineItems($string)
@@ -192,6 +216,12 @@ class Api extends Controller
         return $this->modelAttributes;
     }
 
+    /**
+     * @param $model
+     * @param int $number
+     * @return string
+     * @throws Exception
+     */
     public static function sample($model ,$number = 2)
     {
         $faker = Factory::create();
@@ -206,7 +236,7 @@ class Api extends Controller
                     $sample[] = array
                     (
                         "order_details_id" => $order_id . $faker->numerify("-##"),
-                        "orderm_id" => $order_id,
+                        "order_id" => $order_id,
                         "product_id" => $faker->randomDigit . '0' . $faker->randomDigit . '0',
                         "quantity" => $faker->randomNumber(2),
                     );
@@ -228,6 +258,28 @@ class Api extends Controller
                     );
                 }
                 break;
+
+            case(is_a($model,User::class)) :
+
+                for($i = 0 ; $i < $number ; $i++)
+                {
+                    $fname = $faker->firstName;
+                    $lname = $faker->lastName;
+                    $sample[] = array
+                    (
+                        'user_code' => strtoupper(str_random(3)),
+                        'name' => $fname,
+                        'surname' =>$lname,
+                        'job_title' => $faker->job_title,
+                        'email' => strtolower(substr($fname,0,1).$lname).'@mbc.com',
+                        'password' => bcrypt('secret'),
+                        'user_type' => 1,
+                    );
+                }
+                break;
+
+            default :
+                throw new Exception ("class $model not found" );
         }
 
         return  json_encode($sample);

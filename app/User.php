@@ -39,11 +39,11 @@ class User extends Model implements AuthenticatableContract,
 
     public function orders()
     {
-        return $this->hasMany('App\OrderModel','sales_rep');
+        return $this->hasMany('App\OrderModel','sales_rep','user_code');
     }
 
     public function ordersCount()
     {
-        return count($this->orders());
+        return count($this->orders);
     }
 }

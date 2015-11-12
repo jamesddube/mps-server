@@ -19,7 +19,8 @@ class OrderModel extends Model
         "customer_id",
         "sales_rep",
         "order_status",
-        "sync_status"
+        "sync_status",
+        "status"
     ];
 
     public function lineItems()
