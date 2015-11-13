@@ -12,11 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('layout.master');
+    return view('pages.index');
 });
 
-\Illuminate\Support\Facades\Route::get('/hie',function(){
-    return view('layout.master');
+Route::get('/login',function(){
+    return view('auth.login');
+});
+
+Route::get('user',function(){
+    return view('users.create');
 });
 
 Route::get('/test','TestController@req');
