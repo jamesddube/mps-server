@@ -12,33 +12,57 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'surname' => $faker->lastName,
-        'job_title' => $faker->job_title,
-        'user_type' => $faker->name,
-        'email' => strtolower($faker->firstName."@mbc.co.zw"),
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-    ];
+
+	$name = $faker->firstName;
+	return [
+		'name'           => $name,
+		'surname'        => $faker->lastName,
+		'gender'         => $faker->randomElement($array = ['Male', 'Female']),
+		'job_title'      => $faker->job_title,
+		'email'          => strtolower($name . "@mbc.co.zw"),
+		'password'       => bcrypt('password'),
+		'user_type_id'   => $faker->randomElement($array = [1, 2, 3]),
+		'remember_token' => str_random(10),
+	];
 });
 
-$factory->define(App\OrderModel::class, function (Faker\Generator $faker) {
-    return [
-        "order_id" => $faker->numerify('OD-########'),
-        "customer_id" => ucfirst($faker->randomLetter).$faker->numerify('-###'),
-        "sales_rep" => 2,
-        "order_status" => $faker->randomElement($array = array ('draft','unprocessed','processed')),
-        "sync_status" =>1,
-    ];
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
+	return [
+		"id"              => $faker->numerify('OD-########'),
+		"customer_id"     => ucfirst($faker->randomLetter) . $faker->numerify('-###'),
+		"user_id"         => 2,
+		"order_status_id" => $faker->randomElement($array = [1, 2, 3]),
+		"sync_id"         => $faker->randomElement($array = [1, 2, 3]),
+	];
 });
 
-$factory->define(App\OrderDetailsModel::class, function (Faker\Generator $faker) {
-    $od = $faker->numerify('OD-########');
-    return [
-        "order_details_id" => $od,
-        "order_id" => $od,
-        "product_id" =>1030,
-        "quantity" => 78,
-    ];
+$factory->define(App\OrderDetail::class, function (Faker\Generator $faker) {
+	$od = \App\Product::all('id');
+	$pd = $od[ rand(0, (count($od) - 1)) ]->id;
+
+	return
+		[
+			"order_id"   => null,
+			"product_id" => $pd,
+			"quantity"   => 78,
+		];
+});
+
+$factory->define(App\UserType::class, function (Faker\Generator $faker) {
+	return
+		[
+			"name" => $faker->randomElement(['Sales Representative', 'Manager', 'Administrator']),
+		];
+});
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+	$od = $faker->numerify('PDT-########');
+	return
+		[
+			"id"          => $od,
+			"Description" => $faker->randomElement(['Coke', 'Fanta', 'Sprite']) . " " . $faker->randomElement([300, 330, 500, 1000, 2000]) . " ml",
+			"category_id" => 1,
+			"price"       => 78,
+			"image"       => $faker->imageUrl(150, 150),
+		];
 });

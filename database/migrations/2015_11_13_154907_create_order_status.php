@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SyncStatusMigration extends Migration
+class CreateOrderStatus extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class SyncStatusMigration extends Migration
      */
     public function up()
     {
-        Schema::create('sync_status', function (Blueprint $table) {
+        Schema::create('order_status', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
             $table->timestamps();
@@ -26,6 +26,6 @@ class SyncStatusMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('sync_status');
+        Schema::drop('order_status');
     }
 }

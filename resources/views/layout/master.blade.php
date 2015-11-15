@@ -7,7 +7,7 @@
 <!-- Mirrored from seantheme.com/color-admin-v1.9/admin/html/index_v2.html by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 18 Oct 2015 23:28:16 GMT -->
 <head>
 	<meta charset="utf-8" />
-	<title>Color Admin | Dashboard v2</title>
+	<title>MPS | @yield('title')</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -83,7 +83,7 @@
                         </li>
                         <li class="media">
                             <a href="javascript:;">
-                                <div class="media-left"><img src="assets/img/user-1.jpg" class="media-object" alt="" /></div>
+                                <div class="media-left"><img src="{{ url('assets/img/user-1.jpg')}}" class="media-object" alt="" /></div>
                                 <div class="media-body">
                                     <h6 class="media-heading">John Smith</h6>
                                     <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
@@ -93,7 +93,7 @@
                         </li>
                         <li class="media">
                             <a href="javascript:;">
-                                <div class="media-left"><img src="assets/img/user-2.jpg" class="media-object" alt="" /></div>
+                                <div class="media-left"><img src="{{ url('assets/img/user-2.jpg')}}" class="media-object" alt="" /></div>
                                 <div class="media-body">
                                     <h6 class="media-heading">Olivia</h6>
                                     <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
@@ -126,7 +126,7 @@
                 </li>
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/img/user-13.jpg" alt="" />
+                        <img src="{{ url('assets/img/user-13.jpg')}}" alt="" />
                         <span class="hidden-xs">Adam Schwartz</span> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInLeft">
@@ -154,7 +154,7 @@
             <ul class="nav">
                 <li class="nav-profile">
                     <div class="image">
-                        <a href="javascript:;"><img src="assets/img/user-13.jpg"  height="50" width="50" alt="user picture" /></a>
+                        <a href="javascript:;"><img src="{{ url('assets/img/user-13.jpg')}}"  height="50" width="50" alt="user picture" /></a>
                     </div>
                     <div class="info">
                         James Dube
@@ -201,13 +201,17 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="form_elements.html">Form Elements</a></li>
-                        <li><a href="form_plugins.html">Form Plugins</a></li>
-                        <li><a href="form_slider_switcher.html">Form Slider + Switcher</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
-                        <li><a href="form_wizards.html">Wizards</a></li>
-                        <li><a href="form_wizards_validation.html">Wizards + Validation</a></li>
-                        <li><a href="form_wysiwyg.html">WYSIWYG</a></li>
-                        <li><a href="form_editable.html">X-Editable</a></li>
+                        <li><a href="form_multiple_upload.html">Multiple File Upload</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret pull-right"></b>
+                        <i class="fa fa-building"></i>
+                        <span>Customers</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="form_elements.html">Form Elements</a></li>
                         <li><a href="form_multiple_upload.html">Multiple File Upload</a></li>
                     </ul>
                 </li>
@@ -226,11 +230,22 @@
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret pull-right"></b>
+                        <i class="fa fa-archive"></i>
+                        <span>Reports</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="email_system.html">System Template</a></li>
+                        <li><a href="email_newsletter.html">Newsletter Template</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret pull-right"></b>
                         <i class="fa fa-cogs"></i>
                         <span>Settings</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="email_system.html">System Template</a></li>
+                        <li><a href="email_system.html"><span>Data Sources<i class="fa text-theme fa-database m-l-5"></i></span></a></li>
                         <li><a href="email_newsletter.html">Newsletter Template</a></li>
                     </ul>
                 </li>
@@ -256,7 +271,7 @@
 		</ol>
 		<!-- end breadcrumb -->
 		<!-- begin page-header -->
-		<h1 class="page-header">Dashboard <small>header small text goes here...</small></h1>
+		<h1 class="page-header">@yield('title') <small>header small text goes here...</small></h1>
 		<!-- end page-header -->
 
 
@@ -266,82 +281,7 @@
 	</div>
 	<!-- end #content -->
 
-	<!-- begin theme-panel -->
-	<div class="theme-panel">
-		<a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
-		<div class="theme-panel-content">
-			<h5 class="m-t-0">Color Theme</h5>
-			<ul class="theme-list clearfix">
-				<li class="active"><a href="javascript:;" class="bg-green" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
-				<li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
-				<li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
-				<li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
-				<li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
-				<li><a href="javascript:;" class="bg-black" data-theme="black" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
-			</ul>
-			<div class="divider"></div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label double-line">Header Styling</div>
-				<div class="col-md-7">
-					<select name="header-styling" class="form-control input-sm">
-						<option value="1">default</option>
-						<option value="2">inverse</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label">Header</div>
-				<div class="col-md-7">
-					<select name="header-fixed" class="form-control input-sm">
-						<option value="1">fixed</option>
-						<option value="2">default</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label double-line">Sidebar Styling</div>
-				<div class="col-md-7">
-					<select name="sidebar-styling" class="form-control input-sm">
-						<option value="1">default</option>
-						<option value="2">grid</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label">Sidebar</div>
-				<div class="col-md-7">
-					<select name="sidebar-fixed" class="form-control input-sm">
-						<option value="1">fixed</option>
-						<option value="2">default</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label double-line">Sidebar Gradient</div>
-				<div class="col-md-7">
-					<select name="content-gradient" class="form-control input-sm">
-						<option value="1">disabled</option>
-						<option value="2">enabled</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-5 control-label double-line">Content Styling</div>
-				<div class="col-md-7">
-					<select name="content-styling" class="form-control input-sm">
-						<option value="1">default</option>
-						<option value="2">black</option>
-					</select>
-				</div>
-			</div>
-			<div class="row m-t-10">
-				<div class="col-md-12">
-					<a href="#" class="btn btn-inverse btn-block btn-sm" data-click="reset-local-storage"><i class="fa fa-refresh m-r-3"></i> Reset Local Storage</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end theme-panel -->
+
 
 	</div>
 <!-- end page container -->
@@ -352,18 +292,25 @@
 
 @section('footer')
 <!-- ================== BEGIN BASE JS ================== -->
-<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-<script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ url('assets/plugins/jquery/jquery-1.9.1.min.js')}}"></script>
+<script src="{{ url('assets/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>
+<script src="{{ url('assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js')}}"></script>
+<script src="{{ url('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <!--[if lt IE 9]>
-<script src="assets/crossbrowserjs/html5shiv.js"></script>
-<script src="assets/crossbrowserjs/respond.min.js"></script>
-<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+<script src="{{ url('assets/crossbrowserjs/html5shiv.js') }}"></script>
+<script src="{{ url('assets/crossbrowserjs/respond.min.js') }}"></script>
+<script src="{{ url('assets/crossbrowserjs/excanvas.min.js') }}"></script>
 <![endif]-->
-<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+<script src="{{ url('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{ url('assets/plugins/jquery-cookie/jquery.cookie.js')}}"></script>
+<script src="{{ url('assets/js/apps.min.js') }}"></script>
 <!-- ================== END BASE JS ================== -->
+
+<script>
+    $(document).ready(function() {
+        App.init();
+    });
+</script>
 
 @show
 

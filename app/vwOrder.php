@@ -4,26 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class vwOrdersModel extends Model
+class vwOrder extends Model
 {
     //
 
     protected $table = "vw_orders";
 
-    protected $primaryKey = "order_id";
+    protected $guarded = [
 
-    protected $fillable = [
-
-        "order_id",
-        "customer_id",
+        "id",
+        "customer",
         "sales_rep",
         "order_status",
         "sync_status",
-        "status"
     ];
 
     public function lineItems()
     {
-        return $this->hasMany('App\vwOrderDetailsModel','order_id');
+        return $this->hasMany('App\vwOrderDetail','order_id');
     }
 }

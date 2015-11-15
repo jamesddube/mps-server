@@ -7,8 +7,6 @@
             <div class="stats-icon stats-icon-lg"><i class="fa fa-shopping-cart fa-fw"></i></div>
             <div class="stats-title">TODAY'S ORDERS</div>
             <div class="stats-number">38,900</div>
-            <div class="stats-progress progress">
-            </div>
 
             <div class="stats-desc">Better than last week (76.3%)</div>
         </div>
@@ -20,9 +18,6 @@
             <div class="stats-icon stats-icon-lg"><i class="fa fa-trophy fa-fw"></i></div>
             <div class="stats-title">WEEKLY BESTSELLER</div>
             <div class="stats-number">Fanta Grape 300ml</div>
-            <div class="stats-progress progress">
-                <div class="progress-bar" style="width: 40.5%;"></div>
-            </div>
             <div class="stats-desc">Better than last week (40.5%)</div>
         </div>
     </div>
@@ -33,9 +28,6 @@
             <div class="stats-icon stats-icon-lg"><i class="fa fa-comments fa-fw"></i></div>
             <div class="stats-title">ACTIVE PROMOTIONS</div>
             <div class="stats-number">5</div>
-            <div class="stats-progress progress">
-                <div class="progress-bar" style="width: 54.9%;"></div>
-            </div>
             <div class="stats-desc">Better than last week (54.9%)</div>
         </div>
     </div>
@@ -46,9 +38,6 @@
             <div class="stats-icon stats-icon-lg"><i class="fa fa-thumbs-down fa-fw"></i></div>
             <div class="stats-title">RETURNS</div>
             <div class="stats-number">7,800</div>
-            <div class="stats-progress progress">
-                <div class="progress-bar" style="width: 70.1%;"></div>
-            </div>
             <div class="stats-desc">Better than last week (70.1%)</div>
         </div>
     </div>
@@ -259,9 +248,7 @@
 
 <script>
     $(document).ready(function() {
-        App.init();
         DashboardV2.init();
-
     });
 </script>
 

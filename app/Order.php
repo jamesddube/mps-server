@@ -5,17 +5,13 @@ namespace App;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderModel extends Model
+class Order extends Model
 {
     //
 
-    protected $table = "orders";
-
-    protected $primaryKey = "order_id";
-
     protected $fillable = [
 
-        "order_id",
+        "id",
         "customer_id",
         "sales_rep",
         "order_status",
@@ -25,12 +21,13 @@ class OrderModel extends Model
 
     public function lineItems()
     {
-        return $this->hasMany('App\OrderDetailsModel','order_id');
+        return $this->hasMany('App\OrderDetail');
     }
 
-
-
-
+    public function todaysOrders()
+    {
+        return $this->where('created_at','<',date('Y-m-d'));
+    }
 
 }
 

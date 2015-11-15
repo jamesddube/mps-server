@@ -1,4 +1,5 @@
 @extends('layout.master')
+    @section('title','New User')
     @section('header')
     @parent
         <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -27,22 +28,23 @@
                             <ol>
                                 <li>
                                    Personal Information
-                                    <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
+                                    <small>Personal data about the user</small>
                                 </li>
                                 <li>
                                     Contact Information
-                                    <small>Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin.</small>
+                                    <small>How the system can reach the user</small>
                                 </li>
                                 <li>
                                     User Settings
-                                    <small>Phasellus lacinia placerat neque pretium condimentum.</small>
+                                    <small>Miscellaneous</small>
                                 </li>
                                 <li>
                                     Completed
-                                    <small>Sed nunc neque, dapibus non leo sed, rhoncus dignissim elit.</small>
+                                    <small>That's it!</small>
                                 </li>
                             </ol>
-                            <!-- begin wizard step-1 -->
+
+                           <!-- begin wizard step-1 -->
                             <div class="wizard-step-1">
                                 <fieldset>
                                     <legend class="pull-left width-full">Personal Details</legend>
@@ -59,16 +61,19 @@
                                         <!-- begin col-4 -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Middle Initial</label>
-                                                <input type="text" name="middle" placeholder="A" class="form-control" data-parsley-group="wizard-step-1" required />
+                                                <label>Last Name</label>
+                                                <input type="text" name="lastname" placeholder="Smith" class="form-control" data-parsley-group="wizard-step-1" required />
                                             </div>
                                         </div>
                                         <!-- end col-4 -->
                                         <!-- begin col-4 -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" name="lastname" placeholder="Smith" class="form-control" data-parsley-group="wizard-step-1" required />
+                                                <label>Gender</label>
+                                                <select class="form-control">
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <!-- end col-4 -->
@@ -107,15 +112,21 @@
                             <!-- begin wizard step-3 -->
                             <div class="wizard-step-3">
                                 <fieldset>
-                                    <legend class="pull-left width-full">User Settings</legend>
+                                    <legend class="pull-left width-full">User Roles</legend>
                                     <!-- begin row -->
                                     <div class="row">
                                         <!-- begin col-4 -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Username</label>
+                                                <label>User Group</label>
                                                 <div class="controls">
-                                                    <input type="text" name="username" placeholder="johnsmithy" class="form-control" data-parsley-group="wizard-step-3" required />
+                                                    <select class="form-control" data-parsley-group="wizard-step-3" required >
+                                                        <option></option>
+                                                        <option>Sales Rep</option>
+                                                        <option>Manager - Sales</option>
+                                                        <option>Manager - Finance</option>
+                                                        <option>Administrator</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,22 +134,13 @@
                                         <!-- begin col-4 -->
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Pasword</label>
+                                                <label>Avatar</label>
                                                 <div class="controls">
-                                                    <input type="password" name="password" placeholder="Your password" class="form-control" data-parsley-group="wizard-step-3" required />
+                                                    <input type="file" name="password" placeholder="Your Picture" class="form-control" data-parsley-group="wizard-step-3" required />
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- end col-4 -->
-                                        <!-- begin col-4 -->
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Confirm Pasword</label>
-                                                <div class="controls">
-                                                    <input type="password" name="password2" placeholder="Confirmed password" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- end col-6 -->
                                     </div>
                                     <!-- end row -->
@@ -148,9 +150,9 @@
                             <!-- begin wizard step-4 -->
                             <div>
                                 <div class="jumbotron m-b-0 text-center">
-                                    <h1>Login Successfully</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                                    <h1>Account Created</h1>
+                                    <p>The user account has been created, a activation link has been sent to the user to finish up the process</p>
+                                    <p><a class="btn btn-success btn-lg" role="button">Proceed</a></p>
                                 </div>
                             </div>
                             <!-- end wizard step-4 -->

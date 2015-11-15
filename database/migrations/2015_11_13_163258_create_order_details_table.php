@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrdersDetailsMigration extends Migration
+class CreateOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class OrdersDetailsMigration extends Migration
     public function up()
     {
         Schema::create('order_details', function (Blueprint $table) {
-            //$table->dropForeign('order_details_order_id_foreign');
-            $table->string('order_details_id');
+
+            $table->increments('id');
             $table->string('order_id');
-            $table->integer('product_id');
+            $table->string('product_id');
             $table->integer('quantity');
             $table->timestamps();
-            $table->primary('order_details_id');
             $table->foreign('order_id')
-                ->references('order_id')->on('orders')
+                ->references('id')->on('orders')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('product_id')
+                ->references('id')->on('products')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
     }

@@ -17,9 +17,25 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->all(1,5,5);
+        //$this->all(1,5,5);
+        //$this->call(SyncStatusSeeder::class);
+        //$this->call(OrderStatusSeeder::class);
+        //$this->call(UserTypeSeeder::class);
+
+//        dd(factory(App\OrderDetail::class, 2)->make());
+        factory(App\User::class, 2)->create();
+        factory(App\Product::class, 2)->create();
+        factory(App\Order::class, 200)->make()
+            ->each(function($o){
+            $id = $o->id;
+            $o->save();
+            $o = \App\Order::find($id);
+            $o->lineItems()->save(factory(\App\OrderDetail::class)->make());
+        });
+
 
         Model::reguard();
+
     }
 
 

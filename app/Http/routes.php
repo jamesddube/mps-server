@@ -20,10 +20,38 @@ Route::get('/login',function(){
 });
 
 Route::get('user',function(){
-    return view('users.create');
+    return null;//view('users.create');
 });
 
-Route::get('/test','TestController@req');
+Route::resource('orders','OrderController');
+Route::get('orders/{id}',function(){
+    return view('orders.show');
+});
+
+Route::get('sample',function(){
+    $orders  = new \App\Order();
+
+    return $orders->getTable();
+});
+
+Route::group(['prefix' => 'test'],function()
+{
+    Route::get('users',function(){
+        return \App\User::all()->each(function($e){
+            return $e->type->name;
+        });
+    });
+
+    Route::get('o',function(){
+
+        $o = \App\Order::all();
+        $o->each(function($o){
+            $o->todaysOrders();
+        });
+
+        return $o;
+    });
+});
 Route::get('/test/sample','TestController@gen');
 
 Route::resource('order','OrderController');
@@ -60,7 +88,7 @@ Route::group(['prefix' => 'api'],function()
     {
         Route::resource('orders','Api/OrderController');
         Route::resource('order_details','Api/OrderDetailsController');
-        Route::resource('users','Api/UserController');
+        Route::resource('users','Api\UserController');
 
         Route::get('/',function(){
 

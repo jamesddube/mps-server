@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\OrderModel;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        $users = User::all()->each(function($u){
-             $u->ordersCount();
-        });
-
-        return $users;
-
+        //
     }
 
     /**
@@ -34,8 +26,6 @@ class UserController extends Controller
     public function create()
     {
         //
-
-
     }
 
     /**
@@ -58,10 +48,6 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        /** @var User $user */
-        $user =  User::find($id);
-
-        return $user != null ? $user->ordersCount() : response()->json(['error' => true,'message' => "user $id not found"], 200);
     }
 
     /**
