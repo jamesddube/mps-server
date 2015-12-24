@@ -95,7 +95,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log' => 'daily',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +110,8 @@ return [
 
     'providers' => [
 
+
+        Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -144,6 +146,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'App\Providers\ViewComposerServiceProvider',
+        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+
 
     ],
 
@@ -160,6 +166,7 @@ return [
 
     'aliases' => [
 
+        'Api'       => Dingo\Api\Facade\API::class,
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
@@ -193,7 +200,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
+        'Clockwork' => 'Clockwork\Support\Laravel\Facade',
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderDetail;
 use App\OrderDetailsModel;
 use App\OrderModel;
 use App\User;
@@ -42,13 +43,14 @@ class Api extends Controller
                 return true;
             }
         }
+
         throw new BadRequestHttpException ("invalid json string");
     }
 
     public static function validateProperties(Model $model)
     {
         switch ($model) {
-            case is_a($model,OrderDetailsModel::class) :
+            case is_a($model,OrderDetail::class) :
                 $validator = Validator::make($model->getAttributes(), [
                     'order_details_id' => 'required',
                     "order_id" => "required",

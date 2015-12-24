@@ -2,7 +2,7 @@
         @section('title','OD2828')
         <!-- ======  HEADER  ===== -->
 @section('content')
-
+@if(count($order) > 0)
         <!-- begin invoice -->
 <div class="invoice">
     <div class="invoice-company">
@@ -26,16 +26,16 @@
         <div class="invoice-to">
             <small>to</small>
             <address class="m-t-5 m-b-5">
-                <strong>Company Name</strong><br />
-                Street Address<br />
+                <strong>{{ $order->customer }}</strong><br />
+                {{ $order->address }}<br />
                 City, Zip Code<br />
-                Phone: (123) 456-7890<br />
+                {{ $order->telephone }}<br />
                 Fax: (123) 456-7890
             </address>
         </div>
         <div class="invoice-date">
             <small>Invoice / July period</small>
-            <div class="date m-t-5">August 3,2012</div>
+            <div class="date m-t-5">{{ $order->created_at }}</div>
             <div class="invoice-detail">
                 #{{ $order->id }}<br />
                 Services Product
@@ -106,6 +106,15 @@
     </div>
 </div>
 <!-- end invoice -->
+@else
+<p>
+    <div class="jumbotron text-center text-danger">
+        <h1>NO ENTRIES</h1>
+<p>
+    There are no entries no view here
+</p>
+</p>
+@endif
 
     @endsection
     @section('footer')

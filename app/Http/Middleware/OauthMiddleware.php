@@ -19,7 +19,7 @@ class OauthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+      return $next($request);
         if(!$request->has('access_token'))
         {
             return Api::genMessage('access token not found',true,"oauth error");

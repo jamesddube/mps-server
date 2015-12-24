@@ -39,7 +39,7 @@
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->customer }}</td>
                         <td>{{ $order->sales_rep }}</td>
-                        <td>{{ $order->order_status }}</td>
+                        <td><span class="label label-success">{{ $order->order_status }}</span></td>
                         <td><a href="{{ url('orders/'.$order->id) }}" class="btn btn-sm btn-inverse">
                                 <i class="fa fa-search pull-left"></i>
                                 View<br />
@@ -95,6 +95,10 @@
     <script>
         $(document).ready(function() {
             TableManageTableSelect.init();
+            $('#status')
+            {
+
+            }
             });
     </script>
 @endsection

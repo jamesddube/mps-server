@@ -61,13 +61,9 @@ class OrderController extends Controller
 		if ($order = vwOrder::find($id))
 		{
 			$order->lineItems = $order->lineItems;
+		}
 
-			return view('orders.show',['order' => $order]);
-		}
-		else
-		{
-			return response()->json(['message' => 'order not found'], 200);
-		}
+		return view('orders.show',['order' => $order]);
 	}
 
 	/**

@@ -23,7 +23,17 @@
                     <h4 class="panel-title">Form Wizards</h4>
                 </div>
                 <div class="panel-body">
-                    <form action="/" method="POST" data-parsley-validate="true" name="form-wizard">
+                    <form action="{{ url('users') }}" method="POST" data-parsley-validate="true" name="form-wizard" >
+                        {!! csrf_field() !!}
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div id="wizard">
                             <ol>
                                 <li>
@@ -54,7 +64,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group block1">
                                                 <label>First Name</label>
-                                                <input type="text" name="firstname" placeholder="John" class="form-control" data-parsley-group="wizard-step-1" required />
+                                                <input type="text" value="{{ old('firstname') }}" name="firstname" placeholder="John" class="form-control" data-parsley-group="wizard-step-1" required />
                                             </div>
                                         </div>
                                         <!-- end col-4 -->
@@ -62,7 +72,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" name="lastname" placeholder="Smith" class="form-control" data-parsley-group="wizard-step-1" required />
+                                                <input type="text" value="{{ old('lastname') }}" name="lastname" placeholder="Smith" class="form-control" data-parsley-group="wizard-step-1" required />
                                             </div>
                                         </div>
                                         <!-- end col-4 -->
@@ -70,7 +80,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Gender</label>
-                                                <select class="form-control">
+                                                <select class="form-control" name="gender">
                                                     <option>Male</option>
                                                     <option>Female</option>
                                                 </select>
@@ -92,7 +102,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number</label>
-                                                <input type="text" name="phone" placeholder="1234567890" class="form-control" data-parsley-group="wizard-step-2" data-parsley-type="number" required />
+                                                <input type="text" value="{{ old('phone') }}" name="phone" placeholder="1234567890" class="form-control" data-parsley-group="wizard-step-2" data-parsley-type="number" required />
                                             </div>
                                         </div>
                                         <!-- end col-6 -->
@@ -100,7 +110,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input type="email" name="email" placeholder="someone@example.com" class="form-control" data-parsley-group="wizard-step-2" data-parsley-type="email" required />
+                                                <input type="email" value="{{ old('email') }}" name="email" placeholder="someone@example.com" class="form-control" data-parsley-group="wizard-step-2" data-parsley-type="email" required />
                                             </div>
                                         </div>
                                         <!-- end col-6 -->
@@ -121,11 +131,11 @@
                                                 <label>User Group</label>
                                                 <div class="controls">
                                                     <select class="form-control" data-parsley-group="wizard-step-3" required >
-                                                        <option></option>
-                                                        <option>Sales Rep</option>
-                                                        <option>Manager - Sales</option>
-                                                        <option>Manager - Finance</option>
-                                                        <option>Administrator</option>
+                                                      @if(isset($user_types))
+                                                          @foreach($user_types as $user_type)
+                                                              <option value="{{ $user_type->id }}">{{ $user_type->name }}</option>
+                                                          @endforeach
+                                                      @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -136,7 +146,7 @@
                                             <div class="form-group">
                                                 <label>Avatar</label>
                                                 <div class="controls">
-                                                    <input type="file" name="password" placeholder="Your Picture" class="form-control" data-parsley-group="wizard-step-3" required />
+                                                    <input type="file" value="{{ old('avatar') }}" name="avatar" placeholder="Your Picture" class="form-control" data-parsley-group="wizard-step-3" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +162,7 @@
                                 <div class="jumbotron m-b-0 text-center">
                                     <h1>Account Created</h1>
                                     <p>The user account has been created, a activation link has been sent to the user to finish up the process</p>
-                                    <p><a class="btn btn-success btn-lg" role="button">Proceed</a></p>
+                                    <p><input type="submit" class="btn btn-success btn-lg" role="button" value="Proceed"></p>
                                 </div>
                             </div>
                             <!-- end wizard step-4 -->
@@ -179,7 +189,6 @@
 
         <script>
             $(document).ready(function() {
-                App.init();
                 FormWizardValidation.init();
 
             });

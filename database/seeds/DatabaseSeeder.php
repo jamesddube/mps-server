@@ -23,8 +23,10 @@ class DatabaseSeeder extends Seeder
         //$this->call(UserTypeSeeder::class);
 
 //        dd(factory(App\OrderDetail::class, 2)->make());
-        factory(App\User::class, 2)->create();
-        factory(App\Product::class, 2)->create();
+
+        factory(App\Customer::class, 10)->create();
+        factory(App\User::class, 5)->create();
+        factory(App\Product::class, 100)->create();
         factory(App\Order::class, 200)->make()
             ->each(function($o){
             $id = $o->id;

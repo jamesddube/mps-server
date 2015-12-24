@@ -32,6 +32,10 @@ class CreateOrdersTable extends Migration
                 ->references('id')->on('order_status')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreign('customer_id')
+                ->references('id')->on('customers')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

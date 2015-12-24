@@ -157,7 +157,8 @@
                         <a href="javascript:;"><img src="{{ url('assets/img/user-13.jpg')}}"  height="50" width="50" alt="user picture" /></a>
                     </div>
                     <div class="info">
-                        James Dube
+                        <?php  ?>
+                        {{ $user }}
                         <small>Developer</small>
                     </div>
                 </li>
@@ -174,25 +175,13 @@
                         <span>Users</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="email_inbox.html">New User</a></li>
+                        <li><a href="{{ url('users/create') }}">New User</a></li>
                         <li><a href="email_inbox_v2.html">View User</a></li>
                         <li><a href="email_compose.html">Compose</a></li>
                         <li><a href="email_detail.html">Detail</a></li>
                     </ul>
                 </li>
-                <li class="has-sub">
-                    <a href="javascript:;">
-                        <b class="caret pull-right"></b>
-                        <i class="fa fa-calendar"></i>
-                        <span>Orders</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="ui_general.html">Processed</a></li>
-                        <li><a href="ui_typography.html">Unprocessed</a></li>
-                        <li><a href="ui_tabs_accordions.html">Tabs & Accordions</a></li>
-
-                    </ul>
-                </li>
+                <li><a href="{{ url('/orders') }}"><i class="fa fa-laptop"></i> <span>Orders</span></a></li>
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret pull-right"></b>

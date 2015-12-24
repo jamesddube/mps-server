@@ -23,4 +23,23 @@ class vwOrder extends Model
     {
         return $this->hasMany('App\vwOrderDetail','order_id');
     }
+
+    public static function OrdersByStatus()
+    {
+        $query =  self::whereBetween('date' ,[self::startDate(),self::endDate()])
+            ->where('order_status','draft')->get();
+
+        return $query;
+    }
+
+    static function startDate()
+    {
+        return  date("Y-m-d", strtotime('sunday last week'));
+    }
+
+
+    static function endDate()
+    {
+        return  date("Y-m-d", strtotime('saturday this week'));
+    }
 }

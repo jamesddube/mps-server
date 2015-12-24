@@ -6,7 +6,7 @@
         <div class="widget widget-stats bg-green-darker">
             <div class="stats-icon stats-icon-lg"><i class="fa fa-shopping-cart fa-fw"></i></div>
             <div class="stats-title">TODAY'S ORDERS</div>
-            <div class="stats-number">38,900</div>
+            <div class="stats-number">{{ $count }}</div>
 
             <div class="stats-desc">Better than last week (76.3%)</div>
         </div>

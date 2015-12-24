@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('job_title');
             $table->string('email')->unique();
+            $table->string('avatar',255);
             $table->string('password', 60);
             $table->integer('user_type_id')->unsigned();
             $table->rememberToken();
